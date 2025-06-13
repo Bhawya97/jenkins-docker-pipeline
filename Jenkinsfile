@@ -4,13 +4,13 @@ pipeline {
     environment {
         IMAGE_NAME = 'flask-jenkins-demo'
         IMAGE_TAG = 'latest'
-        DOCKER_HUB_REPO = 'your-dockerhub-username'
+        DOCKER_HUB_REPO = 'bhawya17'
     }
 
     stages {
         stage('Clone Repository') {
             steps {
-                git 'https://github.com/your-username/jenkins-docker-pipeline.git'
+                git 'https://github.com/Bhawya97/jenkins-docker-pipeline.git'
             }
         }
 
