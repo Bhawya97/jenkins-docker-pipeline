@@ -1,7 +1,5 @@
 # Flask Jenkins Docker CI/CD Pipeline
 
-![Flask Logo](https://flask.palletsprojects.com/en/2.2.x/_images/flask-logo.png)
-
 ---
 
 ## 🚀 Project Overview
@@ -40,10 +38,44 @@ The goal is to show how modern software projects are built, packaged, and deploy
 
 ## 🏗️ Architecture Diagram
 
-+------------+ +----------+ +------------+ +-------------+
-| GitHub | ---> | Jenkins | ---> | Docker Hub | ---> | Deployment |
-| Repository | | Pipeline | | Registry | | Environment |
-+------------+ +----------+ +------------+ +-------------+
++----------------------+         +------------------------+        +-------------------------+
+|                      |         |                        |        |                         |
+|     Developer        |  Push   |      GitHub Repo       |  Webhook/Trigger CI/CD  |      Jenkins Server      |
+|  (Writes & commits)  | ------> |  (Source code & Docker | -----------------------> |  (Pipeline orchestration)|
+|                      |         |   Jenkinsfile stored)  |        |                         |
++----------------------+         +------------------------+        +-----------+-------------+
+                                                                                  |
+                                                                                  |
+                                                                                  v
+                                                                    +-------------------------+
+                                                                    |                         |
+                                                                    |   Jenkins Pipeline       |
+                                                                    |  - Checkout source code  |
+                                                                    |  - Build Docker image    |
+                                                                    |  - Run tests (optional)  |
+                                                                    |  - Push Docker image to  |
+                                                                    |    Docker Hub Registry   |
+                                                                    +------------+------------+
+                                                                                 |
+                                                                                 |
+                                                                                 v
+                                                                    +-------------------------+
+                                                                    |                         |
+                                                                    |     Docker Hub           |
+                                                                    |  (Docker image registry) |
+                                                                    +------------+------------+
+                                                                                 |
+                                                                                 |
+                                                                                 v
+                                                                  +---------------------------+
+                                                                  |                           |
+                                                                  |  Deployment Environment    |
+                                                                  |  (Docker Engine / Kubernetes|
+                                                                  |   / Cloud Container Service)|
+                                                                  |  - Pull & run Docker image  |
+                                                                  |  - Host Flask application   |
+                                                                  +---------------------------+
+
 
 Push code changes to GitHub repository.
 
@@ -82,21 +114,21 @@ Docker image is ready to deploy anywhere (cloud, local, servers).
 
 ### Jenkins Pipeline Success
 
-![Jenkins Pipeline]![image](https://github.com/user-attachments/assets/5f7477ab-17e9-41be-bbd8-e726a405f08c)
+![image](https://github.com/user-attachments/assets/5f7477ab-17e9-41be-bbd8-e726a405f08c)
 
 
 ---
 
 ### Docker Hub Image Repository
 
-![Docker Hub]![image](https://github.com/user-attachments/assets/a7860e45-4019-4d28-bec1-dc7d8b789ca3)
+![image](https://github.com/user-attachments/assets/a7860e45-4019-4d28-bec1-dc7d8b789ca3)
 
 
 ---
 
 ### Running Flask App in Browser
 
-![Flask App Running]![image](https://github.com/user-attachments/assets/4f9bc65a-72b7-4819-9a0a-0eab7aaf35f9)
+![image](https://github.com/user-attachments/assets/4f9bc65a-72b7-4819-9a0a-0eab7aaf35f9)
 
 
 ---
