@@ -38,52 +38,16 @@ The goal is to show how modern software projects are built, packaged, and deploy
 
 ## 🏗️ Architecture Diagram
 
-+----------------------+         +------------------------+        +-------------------------+
-|                      |         |                        |        |                         |
-|     Developer        |  Push   |      GitHub Repo       |  Webhook/Trigger CI/CD  |      Jenkins Server      |
-|  (Writes & commits)  | ------> |  (Source code & Docker | -----------------------> |  (Pipeline orchestration)|
-|                      |         |   Jenkinsfile stored)  |        |                         |
-+----------------------+         +------------------------+        +-----------+-------------+
-                                                                                  |
-                                                                                  |
-                                                                                  v
-                                                                    +-------------------------+
-                                                                    |                         |
-                                                                    |   Jenkins Pipeline       |
-                                                                    |  - Checkout source code  |
-                                                                    |  - Build Docker image    |
-                                                                    |  - Run tests (optional)  |
-                                                                    |  - Push Docker image to  |
-                                                                    |    Docker Hub Registry   |
-                                                                    +------------+------------+
-                                                                                 |
-                                                                                 |
-                                                                                 v
-                                                                    +-------------------------+
-                                                                    |                         |
-                                                                    |     Docker Hub           |
-                                                                    |  (Docker image registry) |
-                                                                    +------------+------------+
-                                                                                 |
-                                                                                 |
-                                                                                 v
-                                                                  +---------------------------+
-                                                                  |                           |
-                                                                  |  Deployment Environment    |
-                                                                  |  (Docker Engine / Kubernetes|
-                                                                  |   / Cloud Container Service)|
-                                                                  |  - Pull & run Docker image  |
-                                                                  |  - Host Flask application   |
-                                                                  +---------------------------+
+![image](https://github.com/user-attachments/assets/1c779419-cfc6-4c16-8b73-cfadc9eeaab1)
 
 
-Push code changes to GitHub repository.
+1. Push code changes to GitHub repository.
 
-Jenkins triggers build on code push.
+2. Jenkins triggers build on code push.
 
-Jenkins builds Docker image and pushes it to Docker Hub.
+3. Jenkins builds Docker image and pushes it to Docker Hub.
 
-Docker image is ready to deploy anywhere (cloud, local, servers).
+4. Docker image is ready to deploy anywhere (cloud, local, servers).
 
 ---
 
